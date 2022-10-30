@@ -1,0 +1,11 @@
+{
+  "name": "com.error.staticbatchingfix",
+  "version": "1.0.0",
+  "displayName": "Static Batching Fix",
+  "description": "apkd's script for making static batching sort objects by a Z-curve rather than the random order used by default in unity. \nModified to not rely on Collections (VRC SDK has dll naming collision with collections).\nSee https://github.com/apkd/UnityStaticBatchingSortingPatch",
+  "hideInEditor": false,
+  "dependencies": {
+    "com.unity.mathematics": "1.2.1",
+    "com.unity.burst": "1.4.11"
+  }
+}
