@@ -7,5 +7,9 @@
   "dependencies": {
     "com.unity.mathematics": "1.2.1",
     "com.unity.burst": "1.4.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Error-mdl/StaticBatchingSortingFix.git"
   }
 }
