@@ -1,3 +1,3 @@
 # Static Batching Sorting Fix
 
-[Apkd's fix](https://github.com/apkd/UnityStaticBatchingSortingPatch) for Unity's ludicrously terrible "sorting" for static batches, bundled into a UPM package and modified to work with the VRChat SDK (the SDK currently has a dll with an identical name to one in Unity Collections, this breaks everything).
+[Apkd's fix](https://github.com/apkd/UnityStaticBatchingSortingPatch) for Unity's ludicrously terrible "sorting" for static batches, bundled into a UPM package and modified to work with the VRChat SDK. Apkd's script relies on the BitField64 class from the Unity Collections library. The VRC SDK currently has a dll with an identical name to one in Collections, preventing one from importing the library. To get the script to work I've added the BitField.cs script from collections and moved it to a new namespace to prevent any future issues.
