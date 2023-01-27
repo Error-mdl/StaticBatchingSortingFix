@@ -177,10 +177,10 @@ static class StaticBatchingSortingPatch
         var gameObjectsOrderedByMaterialId = isBuildingPlayer
             ? gameObjects.OrderBy(x => GetMaterialIdAtBuildTime(GetRenderer(x)))
             : gameObjects.OrderBy(x => GetMaterialId(GetRenderer(x)));
-
+        
         return gameObjectsOrderedByMaterialId
             .ThenBy(x => GetLightmapIndex(GetRenderer(x)))
-            .ThenBy(x => HilbertCurve.GetHilbertCurveIndexForWorldSpacePosition(x.transform.position, quantizationStepSize: 0.1f))
+            .ThenBy(x => HilbertCurve.GetHilbertCurveIndexForWorldSpacePosition(GetCenter(x), quantizationStepSize: 0.1f))
             .ToArray();
     }
 
@@ -251,6 +251,25 @@ static class StaticBatchingSortingPatch
             return null;
 
         return filter.GetComponent<Renderer>();
+    }
+
+    static Vector3 GetCenter(GameObject go)
+    {
+        if (!go)
+            return Vector3.zero;
+
+        var filter = go.GetComponent<MeshFilter>();
+
+        if (!filter)
+            return go.transform.position;
+
+        Renderer r;
+        filter.TryGetComponent<Renderer>(out r);
+        if (r == null)
+        {
+            return go.transform.position;
+        }
+        return r.bounds.center;
     }
 
     // https://github.com/Unity-Technologies/UnityCsReference/blob/61f92bd79ae862c4465d35270f9d1d57befd1761/Runtime/Export/StaticBatching/CombineForStaticBatching.cs#L266-L271
